@@ -1,0 +1,9 @@
+[project]
+name = "tflite-micro-example"
+version = "0.1.0"
+requires-python = ">=3.12"
+dependencies = [
+    "ai-edge-litert>=2.1.2",
+    "tensorflow>=2.20.0",
+]
+

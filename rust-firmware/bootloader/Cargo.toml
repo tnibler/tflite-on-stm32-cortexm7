@@ -1,0 +1,38 @@
+[package]
+name = "bootloader"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+flash-lib = { path = "../flash-lib" }
+
+defmt = { workspace = true, optional = true }
+defmt-rtt = { workspace = true, optional = true }
+embassy-stm32 = { workspace = true }
+embassy-sync = { workspace = true }
+embassy-executor = { workspace = true }
+embassy-time.workspace = true
+cortex-m.workspace = true
+cortex-m-rt.workspace = true
+panic-probe = { workspace = true }
+
+[features]
+defmt = ["dep:defmt", "dep:defmt-rtt", "panic-probe/print-defmt", "embassy-executor/defmt", "embassy-stm32/defmt", "embassy-sync/defmt"]
+
+[profile.dev]
+codegen-units = 1
+debug = 2
+debug-assertions = true
+incremental = false
+opt-level = 2
+overflow-checks = true
+
+# cargo build/run --release
+[profile.release]
+codegen-units = 1
+debug = 2
+debug-assertions = false
+incremental = false
+lto = 'fat'
+opt-level = 3
+overflow-checks = false

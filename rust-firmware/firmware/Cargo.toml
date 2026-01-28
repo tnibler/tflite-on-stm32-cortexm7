@@ -1,0 +1,36 @@
+[package]
+name = "firmware"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+embassy-stm32 = { workspace = true, features = ["defmt"] }
+embassy-sync = { workspace = true, features = ["defmt"] }
+embassy-executor = { workspace = true, features = ["defmt"] }
+embassy-time = { workspace = true, features = ["defmt", "defmt-timestamp-uptime"] }
+
+defmt.workspace = true
+defmt-rtt.workspace = true
+cortex-m.workspace = true
+cortex-m-rt.workspace = true
+panic-probe = { workspace = true, features = ["print-defmt"] }
+
+printf-compat = { version = "0.3.1", default-features = false }
+
+[profile.dev]
+codegen-units = 1
+debug = 2
+debug-assertions = true
+incremental = false
+opt-level = 2
+overflow-checks = true
+
+[profile.release]
+codegen-units = 1
+debug = 2
+debug-assertions = false
+incremental = false
+lto = 'fat'
+opt-level = 3
+overflow-checks = false
+

@@ -1,0 +1,36 @@
+[package]
+name = "flash-lib"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+embassy-stm32.workspace = true
+assign-resources.workspace = true
+
+# Dependencies below here are for the flash-test binary only
+embassy-executor = { workspace = true, optional = true }
+defmt = { workspace = true, optional = true }
+defmt-rtt = { workspace = true, optional = true }
+panic-probe = { workspace = true, optional = true }
+cortex-m = { workspace = true, optional = true }
+cortex-m-rt = { workspace = true, optional = true }
+embassy-time = { workspace = true, optional = true }
+
+[features]
+default = ["defmt", "defmt-rtt"]
+flash-test = ["embassy-stm32/memory-x", "defmt", "defmt-rtt", "panic-probe", "embassy-executor", "cortex-m", "cortex-m-rt", "embassy-time"]
+
+
+[[bin]]
+name = "flash-test"
+path = "src/bin/flash_test.rs"
+required-features = ["flash-test"]
+
+# cargo build/run
+[profile.dev]
+codegen-units = 1
+debug = 2
+debug-assertions = true # <-
+incremental = false
+opt-level = 3 # <-
+overflow-checks = true # <-

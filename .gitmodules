@@ -1,0 +1,6 @@
+[submodule "model-lib/third_party/CMSIS-NN"]
+	path = model-lib/third_party/CMSIS-NN
+	url = https://github.com/ARM-software/CMSIS-NN
+[submodule "tflite-micro"]
+	path = tflite-micro
+	url = https://github.com/tensorflow/tflite-micro

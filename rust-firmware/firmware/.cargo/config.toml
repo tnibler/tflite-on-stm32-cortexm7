@@ -1,0 +1,20 @@
+[build]
+target = "thumbv7em-none-eabihf"
+
+[target.thumbv7em-none-eabihf]
+runner = 'probe-rs run --chip STM32H7S3L8Hx --protocol swd --chip-description-path ./definition.yaml --connect-under-reset'
+linker = "arm-none-eabi-g++"
+ar = "arm-none-eabi-ar"
+
+rustflags = [
+  "-C", "link-arg=-mcpu=cortex-m7",
+  "-C", "link-arg=-mthumb",
+  "-C", "link-arg=-mfpu=vfpv4-d16",
+  "-C", "link-arg=-mfloat-abi=hard",
+  "-C", "link-arg=--specs=nano.specs",
+  "-C", "link-arg=-lc",
+  "-C", "link-arg=-lgcc",
+]
+
+[env]
+DEFMT_LOG = "info"
